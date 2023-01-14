@@ -18,7 +18,7 @@
         <i
           class="fa-solid fa-plus text-xl hover:text-weather-secondary duration-150 cursor-pointer"
           @click="addCity"
-          v-if="route.query.preview"
+          v-if="route.query"
         ></i>
       </div>
 
@@ -72,7 +72,7 @@ const route = useRoute();
 const router = useRouter();
 
 const addCity = () => {
-  if (localstorage.getItem('savedCities')) {
+  if (localStorage.getItem("savedCities")) {
     savedCities.value = JSON.parse(
       localStorage.getItem("savedCities")
     )
@@ -100,6 +100,7 @@ const toggleModal = () => {
 
   let query = object.assign({},route.query);
   delete query.preview;
+  query.id = locationObj.id;
   router.replace({ query });
 
 };

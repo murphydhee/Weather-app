@@ -12,10 +12,10 @@
         class="absolute bg-weather-secondary py-2 px-1 text-white w-full shadow-md top-[66px]"
         v-if="mapboxSearchResults"
       >
-      <p v-if="searchError"> Sorry, e be like say you dey stay trenches</p>
-      <p v-if="!searchError && mapboxSearchResults.length === 0">
-        Sorry, e be like say you dey stay trenches
-      </p>
+        <p v-if="searchError">Sorry, e be like say you dey stay trenches</p>
+        <p v-if="!searchError && mapboxSearchResults.length === 0">
+          Sorry, e be like say you dey stay trenches
+        </p>
         <template v-else>
           <li
             v-for="searchResult in mapboxSearchResults"
@@ -28,6 +28,15 @@
         </template>
       </ul>
     </div>
+    <div class="flex flex-col gap-4">
+      <!-- We will have to use the suspense Component again because we used `await getCities` -->
+      <suspense>
+        <DisplayCity />
+        <template #fallback>
+          <P>Fetching saved city data...</P>
+        </template>
+      </suspense>
+    </div>
   </main>
 </template>
 
@@ -35,20 +44,21 @@
 import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import DisplayCity from "../components/DisplayCity.vue";
 
 const router = useRouter();
 const previewCity = (searchResult) => {
-  console.log (searchResult);
-  const [city, state] = searchResult.place_name.split (",");
+  console.log(searchResult);
+  const [city, state] = searchResult.place_name.split(",");
   router.push({
-    name: 'cityView',
-    params: {state: state.replaceAll(" ",""), city: city},
+    name: "cityView",
+    params: { state: state.replaceAll(" ", ""), city: city },
     query: {
       lat: searchResult.geometry.coordinates[1],
       lng: searchResult.geometry.coordinates[0],
       preview: true,
-    }
-  })
+    },
+  });
 };
 
 const searchQuery = ref("");
