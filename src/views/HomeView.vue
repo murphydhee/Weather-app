@@ -33,7 +33,7 @@
       <suspense>
         <DisplayCity />
         <template #fallback>
-          <P>Fetching saved city data...</P>
+          <DisplayCardAnimatedSkeleton />
         </template>
       </suspense>
     </div>
@@ -45,6 +45,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import DisplayCity from "../components/DisplayCity.vue";
+import DisplayCardAnimatedSkeleton from "../components/DisplayCardAnimatedSkeleton.vue";
 
 const router = useRouter();
 const previewCity = (searchResult) => {

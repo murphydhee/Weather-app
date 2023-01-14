@@ -8,14 +8,25 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: "Home",
+      },
     },
     {
       path: "/weather/:state/:city",
       name: "cityView",
-      component: CityView
+      component: CityView,
+      meta: {
+        title: "Weather",
+      },
     },
-  ]
-})
+  ],
+});
 
-export default router
+router.beforeEach((to, fom, next) => {
+  document.title = `${to.meta.title} | Aeolus `;
+  next();
+});
+
+export default router;

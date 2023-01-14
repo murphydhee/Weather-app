@@ -4,7 +4,10 @@
         <animated-placeholder class="max-w-[50%]"/>
         <animated-placeholder class="max-w-[40%]"/>
     </div>
-    
+    <div class=" flex flex-col items-end flex-1 gap-2">
+        <animated-placeholder class="max-w-[50px] w-full" />
+        <animated-placeholder class="max-w-[75px] w-full" />
+    </div>
   </div>
 </template>
 
