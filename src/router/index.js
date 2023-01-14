@@ -24,8 +24,12 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, fom, next) => {
-  document.title = `${to.meta.title} | Aeolus `;
+router.beforeEach((to, from, next) => {
+  document.title = `${
+    to.params.state
+      ? `${to.params.city}, ${to.params.state}`
+      : to.meta.title
+  } | Aeolus`;
   next();
 });
 
